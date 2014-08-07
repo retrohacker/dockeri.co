@@ -1,7 +1,8 @@
 dockeri.co
 ==========
 
-![nodesource/node](./example/node.svg)
+![nodesource/node](./example/node.png)
+
 Badges for Docker
 
 Usage
