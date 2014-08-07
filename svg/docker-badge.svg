@@ -1,0 +1,65 @@
+<svg version="1.1"
+    baseProfile="full"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    xmlns:ev="http://www.w3.org/2001/xml-events"
+    x="0px"
+    y="0px"
+    width="350px"
+    height="112px"
+    viewBox="0 0 350 112"
+    enable-background="new 0 0 350 112"
+  >
+
+  <g>
+    <rect x="1" y="1"
+        width="348" height="110"
+        stroke="rgb(57, 77, 84)"
+        stroke-width="3"
+        fill="rgb(242, 252, 255)"
+    />
+  </g>
+
+  <g transform="translate(14,14)">
+    <g transform="scale(0.18)">
+      {% include "./docker-white.svg" %}
+    </g>
+  </g>
+
+  <g font-family="Courier, Courier New, monospace" font-size="14" fill="rgb(102, 102, 102)">
+    <text x="120" y="38" font-weight="bold" font-size="16">
+      {{ name }}
+    </text>
+    <g transform="translate(98,50)">
+      <g transform="scale(1.1)">
+        <g transform="translate(19.8,-7.1)">
+          {% include "./repository-star-icon.svg" %}
+        </g>
+        <g transform="translate(99.5,0)">
+          {% include "./repository-cloud-icon.svg" %}
+        </g>
+        <g transform="translate(175.3,0)">
+          {% include "./repository-comments-icon.svg" %}
+        </g>
+      </g>
+      <g transform="translate(0,39)">
+        <text transform="translate(37.3,0)" text-anchor="middle">
+          {{ stars }}
+        </text>
+        <text transform="translate(119.6,0)" text-anchor="middle">
+          {{ downloads }}
+        </text>
+        <text transform="translate(202.2,0)" text-anchor="middle">
+          {{ comments }}
+        </text>
+      </g>
+    </g>
+  </g>
+  {% if trusted %}
+  <g transform="translate(325,5)">
+    <g transform="scale(1.2)">
+      {% include "./trusted-icon.svg" %}
+    </g>
+  </g>
+  {% endif %}
+</svg>
