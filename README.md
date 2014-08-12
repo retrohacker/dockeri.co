@@ -1,7 +1,7 @@
 dockeri.co
 ==========
 
-![nodesource/node](http://dockeri.co/image/wblankenship/dockeri.co)
+[![nodesource/node](http://dockeri.co/image/wblankenship/dockeri.co)](https://registry.hub.docker.com/u/wblankenship/dockeri.co/)
 
 Badges for Docker
 
