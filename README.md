@@ -1,7 +1,7 @@
 dockeri.co
 ==========
 
-![nodesource/node](./example/node.png)
+![nodesource/node](https://raw.githubusercontent.com/wblankenship/dockeri.co/master/example/node.png)
 
 Badges for Docker
 
