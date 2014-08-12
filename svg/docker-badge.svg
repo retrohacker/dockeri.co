@@ -13,24 +13,24 @@
 
   <g>
     <rect x="1" y="1"
-        width="348" height="110"
+        width="348" height="80"
         stroke="rgb(57, 77, 84)"
         stroke-width="3"
         fill="rgb(242, 252, 255)"
     />
   </g>
 
-  <g transform="translate(14,14)">
-    <g transform="scale(0.18)">
-      {% include "./docker-white.svg" %}
+  <g transform="translate(10,11)">
+    <g transform="scale(.38)">
+      {% include "./docker_wave_whale.svg" %}
     </g>
   </g>
 
   <g font-family="Courier, Courier New, monospace" font-size="14" fill="rgb(102, 102, 102)">
-    <text x="120" y="38" font-weight="bold" font-size="16">
+    <text x="120" y="28" font-weight="bold" font-size="16">
       {{ name }}
     </text>
-    <g transform="translate(98,50)">
+    <g transform="translate(98,35)">
       <g transform="scale(1.1)">
         <g transform="translate(19.8,-7.1)">
           {% include "./repository-star-icon.svg" %}
@@ -42,7 +42,7 @@
           {% include "./repository-comments-icon.svg" %}
         </g>
       </g>
-      <g transform="translate(0,39)">
+      <g transform="translate(0,35)">
         <text transform="translate(37.3,0)" text-anchor="middle">
           {{ stars }}
         </text>
