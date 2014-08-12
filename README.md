@@ -7,15 +7,15 @@ Badges for Docker
 
 Officially hosted at [dockeri.co](http://dockeri.co)
 
-Get your badge at _dockeri.co/image/_`namespace`_/_`repo`
+Get your badge at _dockeri.co/image/[namespace]/[repo]_
 
 Usage
 ===
 
-`docker run -dP crackerz/dockeri.co`
+`docker run -dp 0.0.0.0:80:8888 crackerz/dockeri.co`
 
 Assuming this starts on port 49153
 
-`wget 127.0.0.1:49153/image/nodesource/node`
+`wget 127.0.0.1/image/wblankenship/dockeri.co`
 
 Will result in the badge above.
