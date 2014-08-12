@@ -5,6 +5,10 @@ dockeri.co
 
 Badges for Docker
 
+Officially hosted at [dockeri.co](http://dockeri.co)
+
+Get your badge at _http://dockeri.co/image/`namespace`/`repo`_
+
 Usage
 ===
 
