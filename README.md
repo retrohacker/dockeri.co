@@ -1,14 +1,14 @@
 dockeri.co
 ==========
 
-![nodesource/node](https://raw.githubusercontent.com/wblankenship/dockeri.co/master/example/node.png)
+![nodesource/node](http://dockeri.co/image/nodesource/node)
 
 Badges for Docker
 
 Usage
 ===
 
-`docker run -dP crackerz/dockerico`
+`docker run -dP crackerz/dockeri.co`
 
 Assuming this starts on port 49153
 
