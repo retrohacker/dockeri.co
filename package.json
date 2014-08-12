@@ -6,7 +6,10 @@
   "dependencies": {
     "humanize-number": "0.0.2",
     "json-stringify-safe": "^5.0.0",
+    "leveldown": "^0.10.2",
+    "levelup": "^0.18.6",
     "log": "^1.4.0",
+    "milli-epoch": "0.0.1",
     "minix": "^1.1.2",
     "scrap": "^0.1.0",
     "swig": "^1.3.2"

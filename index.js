@@ -1,4 +1,5 @@
-var fs        = require('fs'),
+var cache     = require('./cacheLayer/index.js')
+    fs        = require('fs'),
     http      = require('http'),
     humanize  = require('humanize-number'),
     stringify = require('json-stringify-safe'),
@@ -6,7 +7,6 @@ var fs        = require('fs'),
 //    log       = new Log('debug',fs.createWriteStream('/var/log/dockerico.log')),
     minix     = require('minix'),
     path      = require('path'),
-    scrapper  = require('./scrapper/index.js'),
     swig      = require('swig')
 
 var imgProps = {
@@ -26,19 +26,13 @@ var badge = swig.compileFile(path.join(__dirname+"/svg/docker-badge.svg"))
 minix.newEndpoint("/image/",function(req,res) {
   var url = req.url.split("/")
   if(url.length!==4) return serverError(req,res,422,"malformed url")
-/*  scrapper(url[2],url[3],function(e,props) {
-  if(e) return serverError(req,res,503,e)
+  cache.get(url[2],url[3],function(e,props) {
+    if(e) return serverError(req,res,503,e)
     res.setHeader("Content-Type","image/svg+xml")
     props.name = url[2]+"/"+url[3]
+    console.log(props)
     res.end(badge(props))
-  }) */
-  var props = {}
-  props.name = "nodesource/nodejs"
-  props.stars = 4
-  props.downloads = 101
-  props.comments = 2
-  res.setHeader("Content-Type","image/svg+xml")
-  res.end(badge(props))
+  })
 })
 
 minix.setFallback(function(req,res) {
