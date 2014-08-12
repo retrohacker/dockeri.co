@@ -7,7 +7,7 @@ Badges for Docker
 
 Officially hosted at [dockeri.co](http://dockeri.co)
 
-Get your badge at _http://dockeri.co/image/`namespace`/`repo`_
+Get your badge at _dockeri.co/image/_`namespace`_/_`repo`
 
 Usage
 ===
