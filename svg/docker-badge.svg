@@ -5,15 +5,15 @@
     xmlns:ev="http://www.w3.org/2001/xml-events"
     x="0px"
     y="0px"
-    width="350px"
+    width="389px"
     height="112px"
-    viewBox="0 0 350 112"
+    viewBox="0 0 389 112"
     enable-background="new 0 0 350 112"
   >
 
   <g>
     <rect x="1" y="1"
-        width="348" height="80"
+        width="387" height="80"
         stroke="rgb(57, 77, 84)"
         stroke-width="3"
         fill="rgb(242, 252, 255)"
@@ -56,7 +56,7 @@
     </g>
   </g>
   {% if trusted %}
-  <g transform="translate(325,5)">
+  <g transform="translate(364,5)">
     <g transform="scale(1.2)">
       {% include "./trusted-icon.svg" %}
     </g>
