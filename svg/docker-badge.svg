@@ -30,7 +30,7 @@
     <text x="120" y="28" font-weight="bold" font-size="16">
       {{ name }}
     </text>
-    <g transform="translate(98,35)">
+    <g transform="translate(93,35)">
       <g transform="scale(1.1)">
         <g transform="translate(19.8,-7.1)">
           {% include "./repository-star-icon.svg" %}
