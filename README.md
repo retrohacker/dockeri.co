@@ -1,21 +1,21 @@
 dockeri.co
 ==========
 
-![nodesource/node](http://dockeri.co/image/wblankenship/dockeri.co)
+[![nodesource/node](http://dockeri.co/image/wblankenship/dockeri.co)](https://registry.hub.docker.com/u/wblankenship/dockeri.co/)
 
 Badges for Docker
 
 Officially hosted at [dockeri.co](http://dockeri.co)
 
-Get your badge at _http://dockeri.co/image/`namespace`/`repo`_
+Get your badge at dockeri.co/image/[namespace]/[repo]
 
 Usage
 ===
 
-`docker run -dP crackerz/dockeri.co`
+`docker run -dp 0.0.0.0:80:8888 crackerz/dockeri.co`
 
 Assuming this starts on port 49153
 
-`wget 127.0.0.1:49153/image/nodesource/node`
+`wget 127.0.0.1/image/wblankenship/dockeri.co`
 
 Will result in the badge above.
