@@ -37,7 +37,7 @@ minix.newEndpoint("/image/",function(req,res) {
 
 minix.setFallback(function(req,res) {
   res.writeHead(307, {
-    "location" : "http://technotip.org",
+    "location" : "https://registry.hub.docker.com/u/wblankenship/dockeri.co",
     "Content-Type" : "text/html"
   });
   res.end("<html><head><title>Moved</title></head><body><a href='https://registry.hub.docker.com/u/wblankenship/dockeri.co/'>https://registry.hub.docker.com/u/wblankenship/dockeri.co/</a></body><html>")

@@ -12,9 +12,9 @@ Get your badge at dockeri.co/image/[namespace]/[repo]
 Usage
 ===
 
-`docker run -dp 0.0.0.0:80:8888 crackerz/dockeri.co`
+`docker run -dp 80:8888 wblankenship/dockeri.co`
 
-Assuming this starts on port 49153
+Then
 
 `wget 127.0.0.1/image/wblankenship/dockeri.co`
 
