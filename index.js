@@ -4,7 +4,7 @@ var cache     = require('./cacheLayer/index.js')
     humanize  = require('humanize-number'),
     stringify = require('json-stringify-safe'),
     Log       = require('log'),
-//    log       = new Log('debug',fs.createWriteStream('/var/log/dockerico.log')),
+    log       = new Log('debug',fs.createWriteStream('/var/log/dockerico.log')),
     minix     = require('minix'),
     path      = require('path'),
     swig      = require('swig')
@@ -36,7 +36,11 @@ minix.newEndpoint("/image/",function(req,res) {
 })
 
 minix.setFallback(function(req,res) {
-  res.end("404!")
+  res.writeHead(307, {
+    "location" : "http://technotip.org",
+    "Content-Type" : "text/html"
+  });
+  res.end("<html><head><title>Moved</title></head><body><a href='https://registry.hub.docker.com/u/wblankenship/dockeri.co/'>https://registry.hub.docker.com/u/wblankenship/dockeri.co/</a></body><html>")
 })
 
 http.createServer(function(req,res) {
@@ -52,5 +56,5 @@ function serverError(req,res,code,msg) {
   res.statusCode = code
   res.end(stringify(obj,null," "))
   obj.req = req
-  //log.error(stringify(obj,null," "))
+  log.error(stringify(obj,null," "))
 }
