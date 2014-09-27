@@ -1,7 +1,8 @@
 var scrap = require('scrap');
 
 var m = module.exports = function(namespace,repo, cb) {
-  scrap("https://registry.hub.docker.com/u/"+namespace+"/"+repo,function(e,$) {
+  var prefix = namespace==='_'?'':'u/';
+  scrap("https://registry.hub.docker.com/"+prefix+namespace+"/"+repo,function(e,$) {
     if(e) return cb(e)
     var result = {}
     result.stars = $('.stars').text().trim()
