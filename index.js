@@ -29,7 +29,7 @@ minix.newEndpoint("/image/",function(req,res) {
   cache.get(url[2],url[3],function(e,props) {
     if(e) return serverError(req,res,503,e)
     res.setHeader("Content-Type","image/svg+xml")
-    props.name = url[2]+"/"+url[3]
+    props.name = url[2]==='_'?url[3]:url[2]+"/"+url[3];
     console.log(props)
     res.end(badge(props))
   })
