@@ -11,7 +11,7 @@ var cache     = require('./cacheLayer/index.js')
 
 var imgProps = {
   "width": 350,
-  "height": 112,
+  "height": 82,
   "margin": 14
 }
 
