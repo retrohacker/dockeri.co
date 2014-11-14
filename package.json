@@ -5,6 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "humanize-number": "0.0.2",
+    "isdev": "^1.0.1",
     "json-stringify-safe": "^5.0.0",
     "leveldown": "^0.10.2",
     "levelup": "^0.18.6",
