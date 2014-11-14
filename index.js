@@ -49,14 +49,14 @@ minix.newEndpoint("/image/",function(req,res) {
     HandleError(new Error("malformed url"),req)
     return serverError(req,res,422,"malformed url")
   }
-  badges.put(badgeCount++,stringify({namespace:url[2],repo:url[3],time:Date.now()}),function(e) {
-    if(e) return HandleError(e,req)
-  })
   cache.get(url[2],url[3],function(e,props) {
     if(e) {
       HandleError(e,req)
       return serverError(req,res,503,e)
     }
+    badges.put(badgeCount++,stringify({namespace:url[2],repo:url[3],time:Date.now()}),function(e) {
+      if(e) return HandleError(e,req)
+    })
     res.setHeader("Content-Type","image/svg+xml")
     props.name = url[2]==='_'?url[3]:url[2]+"/"+url[3];
     res.end(badge(props))
