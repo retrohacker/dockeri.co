@@ -64,19 +64,35 @@ minix.newEndpoint("/image/",function(req,res) {
 })
 
 minix.newEndpoint("/requests",function(req,res) {
-  res.setHeader("Content-Type","application/json")
-  requests.createValueStream().pipe(res)
+  jsonArrayStream(requests.createValueStream(),res)
 })
 
 minix.newEndpoint("/errors",function(req,res) {
-  res.setHeader("Content-Type","application/json")
-  errors.createValueStream().pipe(res)
+  jsonArrayStream(errors.createValueStream(),res)
 })
 
 minix.newEndpoint("/badges",function(req,res) {
-  res.setHeader("Content-Type","application/json")
-  badges.createValueStream().pipe(res)
+  jsonArrayStream(badges.createValueStream(),res)
 })
+
+function jsonArrayStream(src,dst) {
+  dst.setHeader("Content-Type","application/json")
+  dst.write("{values:[")
+  var prev = null
+  src
+    .on('data',function(data) {
+      if(prev) dst.write(prev+",")
+      prev = data
+    })
+    .on('error',function(e) {
+      if(prev) dst.write(prev)
+      dst.write("],err:"+stringify(e)+"}")
+    })
+    .on('end',function() {
+      if(prev) dst.write(prev)
+      dst.end("]}")
+    })
+}
 
 minix.setFallback(function(req,res) {
   res.writeHead(307, {
