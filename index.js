@@ -75,6 +75,31 @@ minix.newEndpoint("/badges",function(req,res) {
   jsonArrayStream(badges.createValueStream(),res)
 })
 
+minix.newEndpoint("/served",function(req,res) {
+  getStreamCount(badges.createValueStream(),function(e,count) {
+    if(e) {
+      log.error(e)
+      res.statusCode = 500
+      return res.end(stringify(e))
+   }
+   res.end(count.toString())
+  })
+})
+
+function getStreamCount(src,cb) {
+  var count = 0
+  src
+    .on('data',function() {
+      count++
+    })
+    .on('error',function(e) {
+      cb(e)
+    })
+    .on('end',function() {
+      cb(null,count)
+    })
+}
+
 function jsonArrayStream(src,dst) {
   dst.setHeader("Content-Type","application/json")
   dst.write("{values:[")
