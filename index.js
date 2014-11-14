@@ -59,7 +59,6 @@ minix.newEndpoint("/image/",function(req,res) {
     }
     res.setHeader("Content-Type","image/svg+xml")
     props.name = url[2]==='_'?url[3]:url[2]+"/"+url[3];
-    console.log(props)
     res.end(badge(props))
   })
 })
@@ -104,12 +103,12 @@ function serverError(req,res,code,msg) {
 }
 
 function HandleError(e,req) {
-  console.log(e)
+  log.error(stringify(e,null," "))
   var obj = {e:e,time:Date.now(),req:req}
   errors.put(errorCount++,stringify(obj),function(e) {
     if(e) {
-      console.log("UNABLE TO LOG ERROR!")
-      return console.log(e)
+      log.error("UNABLE TO LOG ERROR!")
+      return log.error(stringify(e,null," "))
     }
   })
 }
