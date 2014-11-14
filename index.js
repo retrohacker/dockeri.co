@@ -28,9 +28,9 @@ var requests = levelup('./reqs',{'keyEncoding':'json'})
 //Keep track of b)adges served
 var badges = levelup('./badges',{'keyEncoding':'json'})
 
-var reqCount = 0
-var badgeCount = 0
-var errorCount = 0
+var reqCount = Date.now()
+var badgeCount = Date.now()
+var errorCount = Date.now()
 
 swig.setDefaults({
   root: path.join(__dirname,"svg")
