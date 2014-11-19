@@ -5,9 +5,6 @@ var cache     = require('./cacheLayer/index.js')
     isdev     = require('isdev'),
     levelup   = require('levelup'),
     Log       = require('log'),
-    log       = new Log('debug',fs.createWriteStream((isdev) ?
-                                                     './dockerico.log' :
-                                                     '/var/log/dockerico.log')),
     minix     = require('minix'),
     path      = require('path'),
     stringify = require('json-stringify-safe'),
@@ -19,14 +16,18 @@ var imgProps = {
   "margin": 14
 }
 
+//Where do we put log files?
+var logPath = (isdev) ? __dirname : path.join('var','log')
+var log = new Log('debug',fs.createWriteStream(path.join(logPath,'dockerico.log'))
+
 //Keep track of all errors encountered
-var errors = levelup('./errors',{'keyEncoding':'json'})
+var errors = levelup(path.join(logPath,'errors'),{'keyEncoding':'json'})
 
 //Keep track of all requests made
-var requests = levelup('./reqs',{'keyEncoding':'json'})
+var requests = levelup(path.join(logPath,'reqs'),{'keyEncoding':'json'})
 
-//Keep track of b)adges served
-var badges = levelup('./badges',{'keyEncoding':'json'})
+//Keep track of badges served
+var badges = levelup(path.join(logPath,'badges'),{'keyEncoding':'json'})
 
 var reqCount = Date.now()
 var badgeCount = Date.now()
@@ -102,7 +103,7 @@ function getStreamCount(src,cb) {
 
 function jsonArrayStream(src,dst) {
   dst.setHeader("Content-Type","application/json")
-  dst.write("{values:[")
+  dst.write("{\"values\":[")
   var prev = null
   src
     .on('data',function(data) {
