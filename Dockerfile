@@ -7,6 +7,8 @@ WORKDIR /usr/src/app
 
 RUN npm install
 
+VOLUME /var/log
+
 EXPOSE 8888
 
 CMD ["npm", "start"]
