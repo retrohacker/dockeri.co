@@ -17,7 +17,7 @@ var imgProps = {
 }
 
 //Where do we put log files?
-var logPath = (isdev) ? __dirname : path.join('var','log')
+var logPath = (isdev) ? __dirname : path.join('/','var','log')
 var log = new Log('debug',fs.createWriteStream(path.join(logPath,'dockerico.log')))
 
 //Keep track of all errors encountered
