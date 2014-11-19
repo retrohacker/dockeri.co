@@ -2,11 +2,16 @@ FROM nodesource/node:jessie
 
 MAINTAINER William Blankenship <william.jblankenship@gmail.com>
 
-ADD . /usr/src/app
+EXPOSE 8888
+ENV NODE_ENV production
+
+RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
+COPY package.json /usr/src/app/
 RUN npm install
 
-EXPOSE 8888
+COPY . /usr/src/app
+WORKDIR /usr/src/app
 
 CMD ["npm", "start"]
