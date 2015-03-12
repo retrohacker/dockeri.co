@@ -1,4 +1,4 @@
-FROM nodesource/node:jessie
+FROM nodesource/jessie:0.10
 
 MAINTAINER William Blankenship <william.jblankenship@gmail.com>
 
@@ -13,6 +13,5 @@ COPY package.json /usr/src/app/
 RUN npm install
 
 COPY . /usr/src/app
-WORKDIR /usr/src/app
 
 CMD ["npm", "start"]
