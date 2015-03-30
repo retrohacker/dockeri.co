@@ -87,6 +87,10 @@ minix.newEndpoint("/served",function(req,res) {
   })
 })
 
+minix.newEndpoint("/ok",function(req,res) {
+  res.end('OK')
+})
+
 function getStreamCount(src,cb) {
   var count = 0
   src
