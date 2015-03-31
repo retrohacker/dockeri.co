@@ -1,0 +1,83 @@
+#!/bin/sh
+
+### BEGIN INIT INFO
+# Provides:           dockerico
+# Required-Start:     docker
+# Required-Stop:      docker
+# Default-Start:      2 3 4 5
+# Default-Stop:       0 1 6
+# Short-Description:  A badging service for the docker registry.
+# Description:
+#   dockeri.co is an opensource and free (as in speech and beer!) service for
+#   generating svg badges containing statistics about a docker image located
+#   on the docker repository.
+### END INIT INFO
+
+# Get lsb functions
+. /lib/lsb/init-functions
+
+IMAGE=$(docker images | grep -P "wblankenship/dockeri\.co[\s]*latest" | awk '{print $3}')
+if [ -z "$IMAGE" ]; then
+  log_failure_msg "dockeri.co is not installed. Please run $0 download"
+  exit 1
+fi
+
+download() {
+  docker pull wblankenship/dockeri.co:latest 2>/dev/null 1>/dev/null
+}
+
+start() {
+  docker run -dp 80:8888 -v ${PWD}:/var/log wblankenship/dockeri.co:latest 2>/dev/null 1>/dev/null
+}
+
+terminate() {
+  CONTAINER=$(docker ps -a | grep "wblankenship/dockeri.co:latest" | awk '{print $1}')
+  docker kill $CONTAINER 2>/dev/null 1>/dev/null
+  docker rm $CONTAINER 2>/dev/null 1>/dev/null
+}
+
+restart() {
+  terminate
+  start
+}
+
+case "$1" in
+  start)
+    log_begin_msg "Starting dockeri.co..."
+    start
+    log_end_msg $?
+    ;;
+  stop)
+    log_begin_msg "Stopping dockeri.co..."
+    terminate
+    log_end_msg $?
+    ;;
+  restart)
+    log_begin_msg "Restarting dockeri.co..."
+    restart
+    log_end_msg $?
+    ;;
+  update)
+    log_begin_msg "Updating dockeri.co..."
+    download
+    log_end_msg $?
+    log_begin_msg "Restarting dockeri.co..."
+    restart
+    log_end_msg $?
+    ;;
+  status)
+    CONTAINER=$(docker ps -a | grep "wblankenship/dockeri.co:latest" | awk '{print $1}')
+    if [ -z "$CONTAINER" ]; then
+      log_begin_msg "dockeri.co is not running"
+      log_end_msg 1
+      return 1
+    fi
+    log_begin_msg "dockeri.co is running"
+    log_end_msg 0
+    return 0
+    ;;
+  *)
+    echo "Usage: $0 {start|stop|restart}"
+    exit 1
+    ;;
+esac
