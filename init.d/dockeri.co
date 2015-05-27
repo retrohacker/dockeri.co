@@ -17,8 +17,8 @@
 . /lib/lsb/init-functions
 
 IMAGE=$(docker images | grep -P "wblankenship/dockeri\.co[\s]*latest" | awk '{print $3}')
-if [ -z "$IMAGE" ]; then
-  log_failure_msg "dockeri.co is not installed. Please run $0 download"
+if [ -z "$IMAGE" -a $1 != "update" ]; then
+  log_failure_msg "dockeri.co is not installed. Please run $0 update"
   exit 1
 fi
 
