@@ -1,33 +1,26 @@
-var scrap = require('scrap');
+var scrap = require('scrap')
 
-var m = module.exports = function(namespace,repo, cb) {
-  var prefix = namespace==='_'?'':'u/';
-  var url = "https://registry.hub.docker.com/"+prefix+namespace+"/"+repo
-  scrap(url,function(e,$) {
-    if(e) return cb(e)
+var m = module.exports = function (namespace, repo, cb) {
+  if (namespace === '_') namespace = 'library' // allow us to use api
+  var metaurl = 'https://registry.hub.docker.com/v2/repositories/' + namespace + '/' + repo
+  scrap(metaurl, function (e, $) {
+    if (e) return cb(e)
+    var data = {pull_count: '?', is_automated: false, star_count: '?'}
+    try {
+      data = JSON.parse($.html())
+    } catch (e) {}
     var result = {}
-    try {
-      result.comments = $('.comments').first().text().trim()
-    } catch(e) {}
-    try {
-      result.downloads = $('.downloads').first().text().trim()
-    } catch(e) {}
-    try {
-      result.trusted = $('.trusted').length > 0
-    } catch(e) {}
-    if(namespace==='_') namespace = 'library' //allow us to use api
-    var starUrl = 'https://registry.hub.docker.com/v2/repositories/'+namespace+'/'+repo+'/stars/count/'
-    scrap(starUrl,function(e,$) {
-      if(e) {
-        // Stars endpoint apears to be volatile. Will return `?` if it fails on us.
-        // Better than not returning a badge.
-        result.stars = '?'
-        return cb(null,result)
-      }
+    result.downloads = data.pull_count
+    result.trusted = data.is_automated
+    result.stars = data.star_count
+    var starUrl = 'https://registry.hub.docker.com/v2/repositories/' + namespace + '/' + repo + '/comments'
+    scrap(starUrl, function (e, $) {
+      var data = { count: '?' }
       try {
-        result.stars = $.html()
-      } catch(e) {}
-      return cb(null,result)
+        data = JSON.parse($.html())
+      } catch (e) {}
+      result.comments = data.count
+      return cb(null, result)
     })
   })
 }

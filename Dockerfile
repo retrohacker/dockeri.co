@@ -1,4 +1,4 @@
-FROM iojs
+FROM nodesource/node:4.2
 
 MAINTAINER William Blankenship <william.jblankenship@gmail.com>
 
