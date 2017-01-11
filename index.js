@@ -59,6 +59,7 @@ minix.newEndpoint("/image/",function(req,res) {
       if(e) return HandleError(e,req)
     })
     res.setHeader("Content-Type","image/svg+xml")
+    res.setHeader("Cache-Control", "max-age=300, public")
     props.name = url[2]==='_'?url[3]:url[2]+"/"+url[3];
     res.end(badge(props))
   })
