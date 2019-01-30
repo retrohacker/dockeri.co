@@ -1,8 +1,2 @@
 node_modules
-cache
-npm-debug.log
-errors
-reqs
-badges
-dockerico.log
-old_logs
+*.swp

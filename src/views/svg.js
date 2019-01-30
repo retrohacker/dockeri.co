@@ -1,3 +1,18 @@
+var fs = require('fs');
+var path = require('path');
+
+function file(p) {
+  return fs.readFileSync(path.join(__dirname, p));
+}
+
+var logo_svg = file('docker_wave_whale.svg');
+var star_svg = file('repository-star-icon.svg');
+var cloud_svg = file('repository-cloud-icon.svg');
+var comment_svg = file('repository-comments-icon.svg');
+var trusted_svg = file('trusted-icon.svg');
+
+module.exports = function(name, stars, downloads, comments, trusted) {
+  return `
 <svg version="1.1"
     baseProfile="full"
     xmlns="http://www.w3.org/2000/svg"
@@ -22,44 +37,45 @@
 
   <g transform="translate(10,11)">
     <g transform="scale(.38)">
-      {% include "./docker_wave_whale.svg" %}
+      ${logo_svg}
     </g>
   </g>
 
   <g font-family="Courier, Courier New, monospace" font-size="14" fill="rgb(102, 102, 102)">
     <text x="120" y="28" font-weight="bold" font-size="16">
-      {{ name }}
+      ${name}
     </text>
     <g transform="translate(93,35)">
       <g transform="scale(1.1)">
         <g transform="translate(19.8,-7.1)">
-          {% include "./repository-star-icon.svg" %}
+          ${star_svg}
         </g>
         <g transform="translate(99.5,0)">
-          {% include "./repository-cloud-icon.svg" %}
+          ${cloud_svg}
         </g>
         <g transform="translate(175.3,0)">
+          ${comment_svg}
           {% include "./repository-comments-icon.svg" %}
         </g>
       </g>
       <g transform="translate(0,35)">
         <text transform="translate(37.3,0)" text-anchor="middle">
-          {{ stars }}
+          ${stars}
         </text>
         <text transform="translate(119.6,0)" text-anchor="middle">
-          {{ downloads }}
+          ${downloads}
         </text>
         <text transform="translate(202.2,0)" text-anchor="middle">
-          {{ comments }}
+          ${comments}
         </text>
       </g>
     </g>
   </g>
-  {% if trusted %}
   <g transform="translate(364,5)">
     <g transform="scale(1.2)">
-      {% include "./trusted-icon.svg" %}
+      ${ trusted ? trusted_svg : '' }
     </g>
   </g>
-  {% endif %}
 </svg>
+  `
+}

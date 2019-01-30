@@ -1,0 +1,9 @@
+{
+  "name": "dockerico-get-image-000image",
+  "dependencies": {
+    "@architect/data": "^2.0.13",
+    "@architect/functions": "^1.12.1",
+    "request": "^2.88.0",
+    "request-promise-native": "^1.0.5"
+  }
+}
