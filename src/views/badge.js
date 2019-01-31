@@ -2,6 +2,18 @@ const svg = require('@architect/views/svg.js')
 var get = require('request-promise-native')
 const api = 'https://hub.docker.com/v2/repositories'
 
+function convert(n, b, s) {
+  return ( ( n / b ) | 0 ) + s
+}
+
+function human(value) {
+  const n = parseInt(value)
+  if(n > 1000000000) return convert(n, 1000000000, 'B')
+  if(n > 1000000) return convert(n, 1000000, 'M')
+  if(n > 1000) return convert(n, 1000, 'K')
+  return n
+}
+
 module.exports = async function badge(namespace, image) {
   let url = `${api}/${namespace || 'library'}/${image}/`
   let res
@@ -17,9 +29,9 @@ module.exports = async function badge(namespace, image) {
   }
 
   const name = namespace ? `${namespace}/${image}` : image
-  const stars = res.star_count
-  const downloads = res.pull_count
-  const trusted = res.is_automated
+  const stars = human(res.star_count)
+  const downloads = human(res.pull_count)
+  const trusted = human(res.is_automated)
 
   try {
     console.log('fetching comments')
@@ -32,7 +44,7 @@ module.exports = async function badge(namespace, image) {
     }
   }
 
-  const comments = res.count
+  const comments = human(res.count)
 
   return {
     type: 'image/svg+xml; charset=utf8',
