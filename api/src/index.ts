@@ -26,9 +26,10 @@ function getImage(request: Request): Image | null {
   const match = parseImage.exec(url.pathname);
   console.log(url.pathname);
   console.log(match);
-  if (!match || !match.groups) {
+  if (!match || !match.groups || !match.groups.image) {
     return null;
   }
+  console.log(match.groups);
   return match.groups;
 }
 
@@ -39,7 +40,14 @@ export default {
     ctx: ExecutionContext
   ): Promise<Response> {
     const image = getImage(request);
-    const response = new Response(await badge(image.namespace, image.image));
+    if (!image) {
+      return new Response("", { status: 404 });
+    }
+    const rendered = await badge(image.namespace, image.image);
+    if (!rendered) {
+      return new Response("", { status: 404 });
+    }
+    const response = new Response(rendered);
     response.headers.append("Content-Type", "image/svg+xml");
     return response;
   },

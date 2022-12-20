@@ -21,35 +21,26 @@ function humanBytes(value) {
   return n + "B";
 }
 
-export default async function badge(namespace, image) {
+export default async function badge(namespace, image): string | null {
   let url = `${api}/${namespace || "library"}/${image}/`;
-  let res;
-  try {
-    console.log("fetching stats");
-    res = await (await fetch(url)).json();
-    console.log(res);
-  } catch (e) {
-    console.log(e);
-    return {
-      status: 500,
-    };
+  let res = await fetch(url);
+  if (res.status !== 200) {
+    return null;
   }
 
+  const metadata = await res.json();
   const name = namespace ? `${namespace}/${image}` : image;
-  const stars = human(res.star_count);
-  const downloads = human(res.pull_count);
-  const trusted = human(res.is_automated);
+  const stars = human(metadata.star_count);
+  const downloads = human(metadata.pull_count);
+  const trusted = namespace === "library" || !namespace;
 
-  try {
-    url = `${api}/${namespace || "library"}/${image}/tags/latest`;
-    res = await (await fetch(url)).json();
-    console.log(res);
-  } catch (e) {
-    console.log(e);
+  url = `${api}/${namespace || "library"}/${image}/tags/latest`;
+  res = await fetch(url);
+  let size = "???";
+  if (res.status === 200) {
+    const latest = await res.json();
+    size = humanBytes(latest.full_size);
   }
-
-  console.log(res.full_size);
-  const size = humanBytes(res.full_size);
 
   return svg(name, stars, downloads, size, trusted);
 }
