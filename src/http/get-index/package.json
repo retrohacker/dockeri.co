@@ -1,7 +1,0 @@
-{
-  "name": "dockerico-get-index",
-  "dependencies": {
-    "@architect/data": "^2.0.13",
-    "@architect/functions": "^1.12.1"
-  }
-}
