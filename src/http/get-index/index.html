@@ -19,45 +19,49 @@
     <h1>dockeri.co</h1>
     <h4>Docker badges for your README.md</h4>
     <div>
-      <i>Image Name:</i> <br/>
-      <input id="input" type="text" placeholder="node"></input>
+      <i>Image Name:</i> <br />
+      <input id="input" type="text" placeholder="node" />
     </div>
     <div>
-      <img id="badge" alt="NO IMAGE FOUND" src="https://dockeri.co/image/node"/>
+      <img
+        id="badge"
+        alt="NO IMAGE FOUND"
+        src="https://dockeri.co/image/node"
+      />
     </div>
     <div>
-      <i>html:</i> <br/>
-      <input id="html" type="text"></input>
+      <i>html:</i> <br />
+      <input id="html" type="text" />
     </div>
     <div>
-      <i>markdown:</i> <br/>
-      <input id="markdown" type="text"></input>
+      <i>markdown:</i> <br />
+      <input id="markdown" type="text" />
     </div>
     <script>
-      var input = document.getElementById('input')
-      var burl = 'https://dockeri.co/image'
-      var durl = 'https://hub.docker.com/r'
-      badge = document.getElementById('badge')
-      html = document.getElementById('html')
-      markdown = document.getElementById('markdown')
-      input.oninput = changed
-      updateBadge()
-      var updating = false
+      var input = document.getElementById("input");
+      var burl = "https://dockeri.co/image";
+      var durl = "https://hub.docker.com/r";
+      badge = document.getElementById("badge");
+      html = document.getElementById("html");
+      markdown = document.getElementById("markdown");
+      input.oninput = changed;
+      updateBadge();
+      var updating = false;
       function changed() {
-        if(updating) {
-          return
+        if (updating) {
+          return;
         }
-        updating = true
+        updating = true;
         setTimeout(updateBadge, 1000);
       }
       function updateBadge() {
-        var val = input.value.length === 0 ? 'node' : input.value
-        var bsrc = `${burl}/${val}`
-        var rsrc = `${durl}/${val}`
-        badge.src = bsrc
-        html.value = `<a href="${rsrc}"><img src="${bsrc}"/></a>`
-        markdown.value = `[![dockeri.co](${bsrc})](${rsrc})`
-        updating = false
+        var val = input.value.length === 0 ? "node" : input.value;
+        var bsrc = `${burl}/${val}`;
+        var rsrc = `${durl}/${val}`;
+        badge.src = bsrc;
+        html.value = `<a href="${rsrc}"><img src="${bsrc}"/></a>`;
+        markdown.value = `[![dockeri.co](${bsrc})](${rsrc})`;
+        updating = false;
       }
     </script>
   </body>

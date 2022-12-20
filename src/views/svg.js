@@ -1,17 +1,17 @@
-var fs = require('fs');
-var path = require('path');
+var fs = require("fs");
+var path = require("path");
 
 function file(p) {
   return fs.readFileSync(path.join(__dirname, p));
 }
 
-var logo_svg = file('docker_wave_whale.svg');
-var star_svg = file('repository-star-icon.svg');
-var cloud_svg = file('repository-cloud-icon.svg');
-var comment_svg = file('repository-comments-icon.svg');
-var trusted_svg = file('trusted-icon.svg');
+var logo_svg = file("docker_wave_whale.svg");
+var star_svg = file("repository-star-icon.svg");
+var cloud_svg = file("repository-cloud-icon.svg");
+var comment_svg = file("repository-comments-icon.svg");
+var trusted_svg = file("trusted-icon.svg");
 
-module.exports = function(name, stars, downloads, comments, trusted) {
+module.exports = function (name, stars, downloads, comments, trusted) {
   return `
 <svg version="1.1"
     baseProfile="full"
@@ -73,9 +73,9 @@ module.exports = function(name, stars, downloads, comments, trusted) {
   </g>
   <g transform="translate(364,5)">
     <g transform="scale(1.2)">
-      ${ trusted ? trusted_svg : '' }
+      ${trusted ? trusted_svg : ""}
     </g>
   </g>
 </svg>
-  `
-}
+  `;
+};
