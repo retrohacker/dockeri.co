@@ -34,8 +34,9 @@ export default {
     if (!rendered) {
       return new Response("", { status: 404 });
     }
-    const response = new Response(rendered);
-    response.headers.append("Content-Type", "image/svg+xml");
+    const response = new Response(rendered, {
+      headers: { "Content-Type": "image/svg+xml" },
+    });
     return response;
   },
 };
